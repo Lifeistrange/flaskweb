@@ -1,5 +1,10 @@
 {% extends "bootstrap/base.html" %}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
 {% block title %}Flaskweb{% endblock %}
 
 {% block head %}
@@ -7,8 +12,6 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename = 'favicon.ico') }}" type="image/x-icon">
 {% endblock %}
-
-
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
@@ -40,3 +43,4 @@
     {% block page_content%}{% endblock %}
 </div>
 {% endblock %}
+
