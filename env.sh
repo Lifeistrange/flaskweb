@@ -8,6 +8,6 @@ fi
 
 source ${VENV}/bin/activate 
 
-export PYTHONPATH=${PROJ_DIR}/www/:${PROJ_DIR}
+export PYTHONPATH=${PROJ_DIR}/app/:${PROJ_DIR}
 export PROJ_DIR
 
