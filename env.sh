@@ -8,7 +8,7 @@ fi
 
 source ${VENV}/bin/activate 
 
-export PYTHONPATH=${PROJ_DIR}/app/:${PROJ_DIR}
+export PYTHONPATH=${PROJ_DIR}
 export PROJ_DIR
 
 #export MAIL_USERNAME='1505586488'

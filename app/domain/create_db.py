@@ -2,6 +2,6 @@
 # coding=utf-8
 
 from manage import db
-import domain.model
+import app.domain.model
 
 db.create_all()

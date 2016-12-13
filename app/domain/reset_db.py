@@ -2,7 +2,7 @@
 # coding=utf-8
 
 from manage import db
-import domain.model
+import app.domain.model
 
 db.drop_all()
 db.create_all()
