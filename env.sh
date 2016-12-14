@@ -11,6 +11,6 @@ source ${VENV}/bin/activate
 export PYTHONPATH=${PROJ_DIR}
 export PROJ_DIR
 
-#export MAIL_USERNAME='1505586488'
-#export MAIL_PASSWORD='qcegjiyfdpxnjcab'
-#export FLASK_ADMIN='1505586488@qq.com'
+export MAIL_USERNAME=<your username>
+export MAIL_PASSWORD=<your password>
+export FLASK_ADMIN=<your emailaddress>
