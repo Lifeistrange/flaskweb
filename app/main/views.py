@@ -4,11 +4,13 @@
 from datetime import datetime
 
 from flask import render_template, session, redirect, url_for
+from flask_login import login_required
 
 from . import main
 from .forms import NameForm
 from .. import db
-from ..domain.model import User
+from ..domain.model import User, Permission
+from ..domain.decorators import permission_required, admin_required
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -37,3 +39,14 @@ def index():
 def user(name):
     return render_template('user.html', name=name)
 
+@main.route('/admin')
+@login_required
+@admin_required
+def for_admins_only():
+    return "For aministrators"
+
+@main.route('/moderator')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def for_moderators_only():
+    return "For comment"
