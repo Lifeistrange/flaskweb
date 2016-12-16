@@ -35,9 +35,12 @@ def index():
             #form=form, name=session.get('name'),
             #known = session.get('known'))
 
-@main.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name=name)
+@main.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    return render_template('user.html', user=user)
 
 @main.route('/admin')
 @login_required
@@ -50,3 +53,4 @@ def for_admins_only():
 @permission_required(Permission.MODERATE_COMMENTS)
 def for_moderators_only():
     return "For comment"
+

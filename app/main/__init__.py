@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from flask import Blueprint
+from ..domain.model import Permission
 
 main = Blueprint('main', __name__)
 
