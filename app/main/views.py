@@ -7,22 +7,30 @@ from flask import render_template, session, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
 
 from . import main
-from .forms import NameForm, EditProfileForm, EditProfileAdminForm
+from .forms import NameForm, EditProfileForm, EditProfileAdminForm, PostForm
 from .. import db
-from ..domain.model import User, Permission, Role
+from ..domain.model import User, Permission, Role, Post
 from ..domain.decorators import permission_required, admin_required
 
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html') 
+    form = PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        post = Post(body=form.body.data, author_id=current_user._get_current_object().id)
+        db.session.add(post)
+        return redirect(url_for('.index'))
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', form=form, posts=posts) 
 
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
         abort(404)
-    return render_template('user.html', user=user, current_user=current_user)
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('user.html', user=user, current_user=current_user, posts=posts)
 
 @main.route('/admin')
 @login_required

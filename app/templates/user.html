@@ -6,6 +6,7 @@
 <div class="header">
     <h1>{{ user.username }}</h1>
     {% if user.name or user.location %}
+    <img class="img-rounded profile-thumbanail" src="{{ user.gravatar(size=256) }}">
     <p>
         {% if user.name %}{{ user.name }}{% endif %}
         {% if user.location %}
@@ -31,5 +32,7 @@
         Edit Profile
     </a>
     {% endif %}
+    <h3>Posts by {{ user.username }}</h3>
+    {% include '_posts.html' %}
 </div>
 {% endblock %}
